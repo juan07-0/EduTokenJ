@@ -1,0 +1,6 @@
+{
+  "name": "EduToken LMS",
+  "description": "Plataforma educativa modular basada en llaves de acceso, con estética adaptativa para primaria y secundaria, exámenes asistidos por IA y certificación digital.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

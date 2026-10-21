@@ -1,0 +1,6 @@
+{
+  "summary":  "Comprehensive architectural implementation plan for the Token-based Educational LMS platform (EduToken LMS). Details the dual visual mode (Primaria vs Secundaria), Supabase PostgreSQL schema with hybrid local/cloud storage, key generation and management, central exam builder with Gemini AI rubric grading, and client-side verifiable certificate generator.",
+  "updatedAt":  "2026-10-21T01:51:36.552643239Z",
+  "requestFeedback":  true,
+  "userFacing":  true
+}
