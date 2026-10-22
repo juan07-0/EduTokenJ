@@ -5,20 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script>
       (function() {
+        // Prevent Chrome extension errors from breaking the page
+        window.addEventListener('error', function(event) {
+          if (event.filename && event.filename.includes('chrome-extension://')) {
+            event.preventDefault();
+            return true;
+          }
+        });
+
+        // Provide setter for fetch if environment defines getter-only
         try {
-          if (typeof window !== 'undefined' && window.fetch) {
-            var _origFetch = window.fetch.bind(window);
-            var _activeFetch = _origFetch;
-            Object.defineProperty(window, 'fetch', {
-              get: function() {
-                return _activeFetch;
-              },
-              set: function(fn) {
-                _activeFetch = fn;
-              },
-              configurable: true,
-              enumerable: true
-            });
+          var proto = window.Window ? window.Window.prototype : Object.getPrototypeOf(window);
+          var currentFetch = window.fetch;
+          if (proto && Object.getOwnPropertyDescriptor(proto, 'fetch')) {
+            var protoDesc = Object.getOwnPropertyDescriptor(proto, 'fetch');
+            if (protoDesc && !protoDesc.set) {
+              Object.defineProperty(proto, 'fetch', {
+                get: function() { return currentFetch; },
+                set: function(val) { currentFetch = val; },
+                configurable: true,
+                enumerable: true
+              });
+            }
+          } else {
+            var winDesc = Object.getOwnPropertyDescriptor(window, 'fetch');
+            if (winDesc && !winDesc.set) {
+              Object.defineProperty(window, 'fetch', {
+                get: function() { return currentFetch; },
+                set: function(val) { currentFetch = val; },
+                configurable: true,
+                enumerable: true
+              });
+            }
           }
         } catch (e) {}
       })();

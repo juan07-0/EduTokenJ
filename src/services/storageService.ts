@@ -366,3 +366,8 @@ export function useLMSStore() {
 
   return storageService;
 }
+
+// Pre-initialize immediately
+if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+  initializeStorageIfEmpty();
+}

@@ -7,7 +7,7 @@ import { SecondaryDashboard } from './components/student/SecondaryDashboard';
 import { ExamView } from './components/student/ExamView';
 import { CertificateModal } from './components/student/CertificateModal';
 import { AdminDashboard } from './components/admin/AdminDashboard';
-import { KeyRound, ArrowRight, ShieldAlert, CheckCircle2, ShieldCheck, Sparkles } from 'lucide-react';
+import { KeyRound, ArrowRight, ShieldAlert, CheckCircle2, ShieldCheck, Sparkles, X } from 'lucide-react';
 
 export default function App() {
   const store = useLMSStore();
@@ -17,6 +17,7 @@ export default function App() {
     : undefined;
 
   const [activeCertModal, setActiveCertModal] = useState<IssuedCertificate | null>(null);
+  const [showDemoModal, setShowDemoModal] = useState(false);
 
   // Login form state (used when no session is active)
   const [keyCodeInput, setKeyCodeInput] = useState('');
@@ -200,11 +201,127 @@ export default function App() {
                   <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
                   <span>Acceso seguro protegido · Privacidad garantizada</span>
                 </div>
+
+                {/* Discrete Demo Keys Link */}
+                <div className="pt-2 text-center">
+                  <button
+                    type="button"
+                    onClick={() => setShowDemoModal(true)}
+                    className="text-xs text-slate-400 hover:text-blue-600 underline underline-offset-4 transition-colors"
+                  >
+                    ¿Necesitas llaves de prueba? Haz clic aquí
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         )}
       </main>
+
+      {/* Demo Keys Modal (Separated & Clean) */}
+      {showDemoModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm animate-fade-in">
+          <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 space-y-5">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
+                  <KeyRound className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-base font-bold text-slate-900">Llaves de Prueba Disponibles</h3>
+                  <p className="text-xs text-slate-500">Haz clic en cualquiera para ingresar de inmediato</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowDemoModal(false)}
+                className="p-1.5 rounded-xl text-slate-400 hover:text-slate-600 hover:bg-slate-100"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="space-y-3">
+              {/* Primaria Demo */}
+              <button
+                onClick={() => {
+                  setKeyCodeInput('SOF-1P-4921');
+                  setShowDemoModal(false);
+                  store.recordLogin('SOF-1P-4921');
+                  store.setActiveKeyCode('SOF-1P-4921');
+                }}
+                className="w-full text-left p-3.5 rounded-2xl border-2 border-amber-200 bg-amber-50/70 hover:bg-amber-100/80 transition-all group flex items-center justify-between"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center font-bold shrink-0">
+                    <Sparkles className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-sm text-slate-900">Sofía Gómez</span>
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-200 text-amber-900">3° Primaria</span>
+                    </div>
+                    <span className="font-mono text-xs text-amber-800 font-semibold">SOF-1P-4921</span>
+                    <p className="text-[11px] text-amber-700 mt-0.5">Modo infantil y lúdico con medallas</p>
+                  </div>
+                </div>
+                <span className="text-xs font-bold text-amber-800 group-hover:translate-x-1 transition-transform">Ingresar →</span>
+              </button>
+
+              {/* Secundaria Demo */}
+              <button
+                onClick={() => {
+                  setKeyCodeInput('ALE-2P-8832');
+                  setShowDemoModal(false);
+                  store.recordLogin('ALE-2P-8832');
+                  store.setActiveKeyCode('ALE-2P-8832');
+                }}
+                className="w-full text-left p-3.5 rounded-2xl border-2 border-blue-200 bg-blue-50/70 hover:bg-blue-100/80 transition-all group flex items-center justify-between"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold shrink-0">
+                    <KeyRound className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-sm text-slate-900">Alejandro Torres</span>
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-200 text-blue-900">9° Secundaria</span>
+                    </div>
+                    <span className="font-mono text-xs text-blue-800 font-semibold">ALE-2P-8832</span>
+                    <p className="text-[11px] text-blue-700 mt-0.5">Modo sobrio, minimalista y académico</p>
+                  </div>
+                </div>
+                <span className="text-xs font-bold text-blue-800 group-hover:translate-x-1 transition-transform">Ingresar →</span>
+              </button>
+
+              {/* Admin Demo */}
+              <button
+                onClick={() => {
+                  setKeyCodeInput('ADM-MASTER-2026');
+                  setShowDemoModal(false);
+                  store.recordLogin('ADM-MASTER-2026');
+                  store.setActiveKeyCode('ADM-MASTER-2026');
+                }}
+                className="w-full text-left p-3.5 rounded-2xl border-2 border-purple-200 bg-purple-50/70 hover:bg-purple-100/80 transition-all group flex items-center justify-between"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-purple-700 text-white flex items-center justify-center font-bold shrink-0">
+                    <ShieldCheck className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-sm text-slate-900">Administrador Rectoría</span>
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-200 text-purple-900">Control Total</span>
+                    </div>
+                    <span className="font-mono text-xs text-purple-800 font-semibold">ADM-MASTER-2026</span>
+                    <p className="text-[11px] text-purple-700 mt-0.5">Generador de llaves, exámenes, alertas y Supabase</p>
+                  </div>
+                </div>
+                <span className="text-xs font-bold text-purple-800 group-hover:translate-x-1 transition-transform">Ingresar →</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Official Certificate PDF Modal */}
       <CertificateModal

@@ -1,56 +1,68 @@
-# EduToken LMS · Plataforma Educativa Basada en Llaves de Acceso
+# 🎓 EduToken LMS · Plataforma Educativa Basada en Llaves
 
-Plataforma educativa modular (LMS), de cero costo de inicio y ultra-optimizada en recursos, con autenticación sin contraseñas mediante **llaves de acceso (tokens)**, doble interfaz estética adaptativa (**Modo Primaria** lúdico vs. **Modo Secundaria** minimalista/universitario), evaluación asistida por IA mediante rúbricas pedagógicas y generación de certificados digitales oficiales verificables en PDF.
+<p align="center">
+  <img src="https://img.shields.io/badge/React-19.0-61DAFB?logo=react&logoColor=black" alt="React 19" />
+  <img src="https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Vite-8.x-646CFF?logo=vite&logoColor=white" alt="Vite" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?logo=tailwindcss&logoColor=white" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/Supabase-Ready-3ECF8E?logo=supabase&logoColor=white" alt="Supabase" />
+  <img src="https://img.shields.io/badge/Gemini_AI-3.8_Flash-8E75B2?logo=google&logoColor=white" alt="Gemini AI" />
+  <img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="License Apache 2.0" />
+</p>
 
 ---
 
-## 🌟 Características Principales
+## 📖 Descripción General
 
-### 1. Autenticación Universal por Llaves (Tokens)
-- Acceso sin contraseñas para mayor privacidad y cero fricción.
-- Llaves con permisos parametrizables por alumno (ej. `SOF-1P-4921`):
-  - Grado asignado (1° a 11°).
-  - Periodos académicos autorizados (Periodos 1, 2 y 3).
-  - Asignaturas troncales habilitadas.
-- Llaves administrativas exclusivas para docentes y rectores (ej. `ADM-MASTER-2026`).
+**EduToken LMS** es una plataforma modular de gestión de aprendizaje (Learning Management System), diseñada para **cero costo de inicio** y máxima optimización de recursos. Elimina las contraseñas tradicionales sustituyéndolas por **llaves de acceso únicas (tokens)** parametrizables por alumno, e incorpora dos modos visuales adaptativos según el nivel escolar:
 
-### 2. Doble Experiencia Visual Adaptativa (UI/UX)
-- **Modo Primaria (Grados 1° a 5°):**
-  - Diseño interactivo, amigable y lúdico para niños desde los 6 años.
-  - Botones amplios con microinteracciones y medallas de progreso.
-  - Paleta cálida y enérgica con bordes redondeados (`rounded-3xl`).
-- **Modo Secundaria/Media (Grados 6° a 11°):**
-  - Interfaz minimalista, sobria y profesional estilo SaaS / campus universitario.
-  - Métricas de rendimiento escolar con cifras tabulares (`font-mono tabular-nums`).
-  - Modo lectura enfocado y libre de distracciones infantiles.
+- 🎨 **Modo Primaria (Grados 1° a 5°):** Entorno cálido, lúdico e interactivo para niños desde los 6 años, con botones amplios, medallas de logro y microinteracciones fluidas.
+- 📐 **Modo Secundaria y Media (Grados 6° a 11°):** Interfaz minimalista, sobria y profesional estilo dashboard académico/universitario, enfocada en productividad sin distracciones.
 
-### 3. Estructura Curricular
+---
+
+## 🚀 Despliegue en GitHub Pages (1 Clic)
+
+El repositorio incluye el archivo de automatización [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) para publicar la aplicación gratis en GitHub Pages:
+
+1. Ve a tu repositorio en GitHub $\to$ **Settings** $\to$ **Pages**.
+2. En la sección **Build and deployment** $\to$ **Source**, selecciona **`GitHub Actions`**.
+3. ¡Listo! Cada vez que hagas un `git push` a la rama `main`, tu aplicación se compilará y estará visible públicamente en:
+   ```
+   https://<tu-usuario>.github.io/<nombre-del-repositorio>/
+   ```
+
+---
+
+## 🔑 Llaves de Prueba (Demo Tokens)
+
+Usa cualquiera de estas llaves en la pantalla de inicio para probar cada perfil:
+
+| Llave de Acceso | Estudiante / Docente | Grado Escolar | Modo Visual | Permisos Habilitados |
+| :--- | :--- | :--- | :--- | :--- |
+| `SOF-1P-4921` | **Sofía Gómez** | 3° Primaria | **Lúdico Primaria** | Todos los periodos (1, 2, 3) y las 5 materias |
+| `MAT-1P-1044` | **Mateo Rivas** | 1° Primaria | **Lúdico Primaria** | Periodo 1 · Matemáticas, Lenguaje y Ciencias |
+| `ALE-2P-8832` | **Alejandro Torres** | 9° Secundaria | **Académico Secundaria**| Todos los periodos y materias |
+| `VAL-3P-9901` | **Valeria Castro** | 11° Media | **Académico Secundaria**| Periodos 1 y 2 · Matemáticas, Ciencias e Inglés |
+| `ADM-MASTER-2026` | **Prof. Carlos Mendoza** | Rector / Admin | **Panel Administrador** | Acceso global: llaves, exámenes y reportes |
+
+---
+
+## ⚡ Estructura Curricular
+
 - **11 Grados Escolares:** De 1° a 11°.
 - **3 Periodos Académicos:** Periodo 1, Periodo 2 y Periodo 3.
-- **5 Asignaturas Troncales:** Matemáticas, Lenguaje, Ciencias Naturales, Ciencias Sociales e Inglés.
-
-### 4. Constructor Central de Exámenes & Evaluación con IA
-- Preguntas cerradas (opción múltiple) con calificación automática instantánea.
-- Preguntas abiertas con corrección pedagógica asistida por **Gemini 3.8 Flash** (`@google/genai`) contrastada con la rúbrica del profesor.
-- Umbral de aprobación configurable (ej. 70%, 80%).
-
-### 5. Certificados Oficiales en PDF & Alertas en Tiempo Real
-- **Al aprobar:** Celebración inmediata con confeti y botón para generar y descargar el **Certificado Oficial en PDF** (300 DPI vectorial con `jspdf`), dotado de código hash de verificación, firmas directivas y registro permanente.
-- **Al reprobar:** Mensaje pedagógico constructivo y emisión de **Alerta de Refuerzo** en tiempo real visible en el panel de administración.
-
-### 6. Persistencia Híbrida & Supabase Ready
-- Almacenamiento reactivo local de cero costo de inicio (funciona al clonar sin bases de datos obligatorias).
-- Esquema SQL DDL de **Supabase (PostgreSQL)** listo para producción con 1 clic y respaldo/restauración en formato JSON.
+- **5 Asignaturas Troncales por Periodo:**
+  1. 🧮 **Matemáticas**: Operaciones, álgebra, pensamiento lógico y geometría.
+  2. 📖 **Lenguaje y Comunicación**: Comprensión lectora, gramática y redacción.
+  3. 🌿 **Ciencias Naturales**: Biología, física, química y medio ambiente.
+  4. 🧭 **Ciencias Sociales**: Historia, geografía y convivencia ciudadana.
+  5. 🌍 **Inglés Global**: Vocabulario, gramática y comunicación oral y escrita.
 
 ---
 
-## 🚀 Inicio Rápido (Local)
+## 🛠️ Instalación y Ejecución Local
 
-### Requisitos
-- Node.js 18+ o superior
-- npm o pnpm
-
-### Instalación
 ```bash
 # 1. Clonar el repositorio
 git clone https://github.com/tu-usuario/edutoken-lms.git
@@ -59,143 +71,68 @@ cd edutoken-lms
 # 2. Instalar dependencias
 npm install
 
-# 3. Configurar variables de entorno (opcional para IA)
+# 3. Configurar variables de entorno (opcional)
 cp .env.example .env
-# Añade tu GEMINI_API_KEY si deseas evaluación por IA en vivo
 
-# 4. Iniciar el servidor de desarrollo
+# 4. Iniciar servidor de desarrollo
 npm run dev
 ```
 
-La aplicación estará disponible en `http://localhost:3000`.
+Abre tu navegador en `http://localhost:3000`.
 
 ---
 
-## 🔑 Llaves de Demostración Pre-cargadas
+## 🗄️ Base de Datos Supabase (PostgreSQL)
 
-Para pruebas inmediatas sin necesidad de crear llaves primero:
+La plataforma opera de forma local inmediata, pero está 100% preparada para conectarse con **Supabase** de manera gratuita:
 
-| Llave | Usuario | Perfil / Grado | Modo Visual |
-| :--- | :--- | :--- | :--- |
-| `SOF-1P-4921` | Sofía Gómez | 3° Primaria | **Modo Lúdico** (Primaria) |
-| `MAT-1P-1044` | Mateo Rivas | 1° Primaria | **Modo Lúdico** (Primaria) |
-| `ALE-2P-8832` | Alejandro Torres | 9° Secundaria | **Modo Académico** (Secundaria) |
-| `VAL-3P-9901` | Valeria Castro | 11° Media | **Modo Académico** (Secundaria) |
-| `ADM-MASTER-2026`| Prof. Carlos Mendoza| Administrador / Rector | **Panel de Administración** |
+1. El script SQL con las 5 tablas (`users`, `keys`, `exams`, `results`, `certificates`) está disponible en el archivo [`supabase_schema.sql`](supabase_schema.sql).
+2. En tu proyecto de Supabase, entra a **`SQL Editor`** $\to$ **`+ New query`**, pega el contenido de `supabase_schema.sql` y presiona **`Run`**.
+3. En Supabase ve a ⚙️ **`Project Settings`** $\to$ **`Data API`**, copia tu **`Project URL`** y tu **`anon public key`**, e ingrésalas en el panel de administración (Pestaña 5) de la app para sincronizar tus datos en tiempo real.
 
 ---
 
-## 🗄️ Esquema SQL de Supabase (PostgreSQL)
-
-Copia y pega este script en el **SQL Editor** de tu proyecto en [Supabase](https://supabase.com):
-
-```sql
-CREATE TABLE IF NOT EXISTS access_keys (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    key_code VARCHAR(32) UNIQUE NOT NULL,
-    role VARCHAR(16) NOT NULL CHECK (role IN ('student', 'admin')),
-    student_name VARCHAR(120),
-    grade INTEGER CHECK (grade BETWEEN 1 AND 11),
-    allowed_periods INTEGER[] DEFAULT '{1,2,3}',
-    allowed_subjects TEXT[] DEFAULT '{"matematicas","lenguaje","ciencias_naturales","ciencias_sociales","ingles"}',
-    is_active BOOLEAN DEFAULT TRUE,
-    created_at TIMESTAMPTZ DEFAULT NOW(),
-    last_login_at TIMESTAMPTZ
-);
-
-CREATE TABLE IF NOT EXISTS curriculum_lessons (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    grade INTEGER NOT NULL CHECK (grade BETWEEN 1 AND 11),
-    period INTEGER NOT NULL CHECK (period BETWEEN 1 AND 3),
-    subject VARCHAR(32) NOT NULL,
-    title VARCHAR(200) NOT NULL,
-    summary TEXT,
-    content_markdown TEXT NOT NULL,
-    video_url TEXT,
-    order_index INTEGER DEFAULT 0,
-    created_at TIMESTAMPTZ DEFAULT NOW(),
-    updated_at TIMESTAMPTZ DEFAULT NOW()
-);
-
-CREATE TABLE IF NOT EXISTS exams (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    grade INTEGER NOT NULL CHECK (grade BETWEEN 1 AND 11),
-    period INTEGER NOT NULL CHECK (period BETWEEN 1 AND 3),
-    subject VARCHAR(32) NOT NULL,
-    title VARCHAR(200) NOT NULL,
-    passing_score INTEGER DEFAULT 70 CHECK (passing_score BETWEEN 1 AND 100),
-    questions JSONB NOT NULL,
-    created_at TIMESTAMPTZ DEFAULT NOW(),
-    updated_at TIMESTAMPTZ DEFAULT NOW()
-);
-
-CREATE TABLE IF NOT EXISTS exam_submissions (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    exam_id UUID REFERENCES exams(id) ON DELETE CASCADE,
-    key_code VARCHAR(32) NOT NULL,
-    student_name VARCHAR(120) NOT NULL,
-    grade INTEGER NOT NULL,
-    period INTEGER NOT NULL,
-    subject VARCHAR(32) NOT NULL,
-    score NUMERIC(5,2) NOT NULL,
-    passed BOOLEAN NOT NULL,
-    answers JSONB NOT NULL,
-    ai_feedback JSONB,
-    submitted_at TIMESTAMPTZ DEFAULT NOW()
-);
-
-CREATE TABLE IF NOT EXISTS issued_certificates (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    verification_code VARCHAR(64) UNIQUE NOT NULL,
-    submission_id UUID REFERENCES exam_submissions(id),
-    student_name VARCHAR(120) NOT NULL,
-    grade INTEGER NOT NULL,
-    period INTEGER NOT NULL,
-    subject VARCHAR(32) NOT NULL,
-    score NUMERIC(5,2) NOT NULL,
-    institution_name VARCHAR(150) DEFAULT 'Instituto Educativo Modelo',
-    issued_at TIMESTAMPTZ DEFAULT NOW()
-);
-```
-
----
-
-## 📦 Estructura del Proyecto
+## 📂 Arquitectura de Archivos del Proyecto
 
 ```
 .
-├── server.ts                    # Servidor Express + API Gemini 3.8 Flash
-├── index.html                   # Entry point con fuentes tipográficas Google
-├── metadata.json                # Metadatos del applet AI Studio
-├── package.json                 # Dependencias y scripts
-├── vite.config.ts               # Configuración Vite + Tailwind CSS v4
+├── .github/
+│   └── workflows/
+│       └── deploy.yml            # Despliegue automático a GitHub Pages
+├── server.ts                     # Servidor Express + API Gemini 3.8 Flash
+├── supabase_schema.sql           # Esquema SQL oficial con las 5 tablas
+├── index.html                    # Entrada HTML con tipografía y soporte de fetch
+├── package.json                  # Dependencias y scripts
+├── vite.config.ts                # Configuración de Vite con base relativa './'
+├── README.md                     # Documentación principal
+├── LICENSE                       # Licencia Apache 2.0
 ├── src/
-│   ├── main.tsx                 # Montaje de React 19
-│   ├── App.tsx                  # Enrutador principal según rol y grado
-│   ├── index.css                # Estilos globales y tokens tipográficos
+│   ├── main.tsx                  # Bootstrap de React
+│   ├── App.tsx                   # Enrutador principal según la llave
+│   ├── index.css                 # Tailwind CSS v4 y estilos tipográficos
 │   ├── types/
-│   │   └── lms.ts               # Tipos TypeScript para toda la plataforma
+│   │   └── lms.ts                # Modelos de datos TypeScript
 │   ├── data/
-│   │   └── mockCurriculum.ts    # Datos iniciales para 11 grados, 3 periodos y 5 materias
+│   │   └── mockCurriculum.ts     # Semillas iniciales curriculares
 │   ├── services/
-│   │   ├── storageService.ts    # Almacenamiento reactivo local + sync
-│   │   ├── aiEvaluator.ts       # Cliente de evaluación pedagógica con IA
-│   │   └── certificatePdf.ts    # Generador de diplomas PDF con jsPDF
+│   │   ├── storageService.ts     # Persistencia reactiva local (cero costo)
+│   │   ├── supabaseClient.ts     # Cliente y sincronizador oficial de Supabase
+│   │   ├── aiEvaluator.ts        # Corrección de preguntas abiertas con IA
+│   │   └── certificatePdf.ts     # Generador de certificados PDF oficiales
 │   └── components/
 │       ├── common/
-│       │   └── TopBar.tsx       # Barra de navegación 3-Zone Contract
-│       ├── auth/
-│       │   └── TokenLoginModal.tsx # Acceso por llave con perfiles demo
+│       │   └── TopBar.tsx        # Barra de navegación 3-Zone Contract
 │       ├── student/
 │       │   ├── PrimaryDashboard.tsx   # Modo Primaria (1°-5°) lúdico
 │       │   ├── SecondaryDashboard.tsx # Modo Secundaria (6°-11°) académico
-│       │   ├── ExamView.tsx           # Exámenes con IA, confeti y resultados
-│       │   └── CertificateModal.tsx   # Diploma oficial con código verificador
+│       │   ├── ExamView.tsx           # Examen con calificación y confeti
+│       │   └── CertificateModal.tsx   # Visualizador y descarga de diplomas PDF
 │       └── admin/
-│           └── AdminDashboard.tsx     # Panel de gestión de llaves, contenidos y alertas
+│           └── AdminDashboard.tsx     # Panel de gestión, exámenes y alertas
 ```
 
 ---
 
 ## 📄 Licencia
-Este proyecto está bajo la licencia [Apache 2.0](LICENSE).
+
+Este proyecto está distribuido bajo la Licencia [Apache 2.0](LICENSE).

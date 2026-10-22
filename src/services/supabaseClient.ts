@@ -7,9 +7,9 @@ import {
   IssuedCertificate,
 } from '../types/lms';
 
-// Read from Vite environment variables (VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY)
-const envUrl = import.meta.env.VITE_SUPABASE_URL as string | undefined;
-const envAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
+// Read from Vite environment variables (VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY) safely
+const envUrl = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SUPABASE_URL) as string | undefined;
+const envAnonKey = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SUPABASE_ANON_KEY) as string | undefined;
 
 let supabaseInstance: SupabaseClient | null = null;
 

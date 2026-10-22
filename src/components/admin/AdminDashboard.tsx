@@ -115,6 +115,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     success: boolean;
     text: string;
   } | null>(null);
+  const [backupToast, setBackupToast] = useState<string | null>(null);
+  const [showResetConfirm, setShowResetConfirm] = useState(false);
 
   // SEARCH FILTERS
   const [keySearchFilter, setKeySearchFilter] = useState('');
@@ -846,9 +848,7 @@ CREATE INDEX IF NOT EXISTS idx_certificates_code ON certificates(verification_co
                               {k.id !== currentAdminKey.id && (
                                 <button
                                   onClick={() => {
-                                    if (confirm(`¿Eliminar la llave ${k.keyCode}?`)) {
-                                      store.deleteKey(k.id);
-                                    }
+                                    store.deleteKey(k.id);
                                   }}
                                   className="p-1 text-slate-400 hover:text-rose-600 transition-colors"
                                   title="Eliminar llave"
@@ -1045,9 +1045,7 @@ CREATE INDEX IF NOT EXISTS idx_certificates_code ON certificates(verification_co
                         </button>
                         <button
                           onClick={() => {
-                            if (confirm(`¿Eliminar la lección "${l.title}"?`)) {
-                              store.deleteLesson(l.id);
-                            }
+                            store.deleteLesson(l.id);
                           }}
                           className="p-1 text-slate-400 hover:text-rose-600"
                         >
@@ -1659,9 +1657,11 @@ CREATE INDEX IF NOT EXISTS idx_certificates_code ON certificates(verification_co
                       reader.onload = (event) => {
                         const content = event.target?.result as string;
                         if (content && store.importFullBackup(content)) {
-                          alert('¡Copia de seguridad restaurada exitosamente!');
+                          setBackupToast('¡Copia de seguridad restaurada exitosamente!');
+                          setTimeout(() => setBackupToast(null), 3000);
                         } else {
-                          alert('Error al leer el archivo JSON.');
+                          setBackupToast('Error al leer el archivo JSON.');
+                          setTimeout(() => setBackupToast(null), 3000);
                         }
                       };
                       reader.readAsText(file);
@@ -1669,18 +1669,44 @@ CREATE INDEX IF NOT EXISTS idx_certificates_code ON certificates(verification_co
                   />
                 </label>
 
-                <button
-                  onClick={() => {
-                    if (confirm('¿Restablecer todo a los datos iniciales de fábrica?')) {
-                      store.resetAllToFactory();
-                    }
-                  }}
-                  className="px-4 py-2.5 text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-200 rounded-xl text-xs font-semibold transition-colors flex items-center gap-1.5 ml-auto"
-                >
-                  <RefreshCw className="w-3.5 h-3.5" />
-                  <span>Reiniciar a Fábrica</span>
-                </button>
+                {!showResetConfirm ? (
+                  <button
+                    onClick={() => setShowResetConfirm(true)}
+                    className="px-4 py-2.5 text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-200 rounded-xl text-xs font-semibold transition-colors flex items-center gap-1.5 ml-auto"
+                  >
+                    <RefreshCw className="w-3.5 h-3.5" />
+                    <span>Reiniciar a Fábrica</span>
+                  </button>
+                ) : (
+                  <div className="flex items-center gap-2 ml-auto p-1.5 bg-rose-50 border border-rose-200 rounded-xl text-xs">
+                    <span className="text-rose-800 font-medium">¿Seguro?</span>
+                    <button
+                      onClick={() => {
+                        store.resetAllToFactory();
+                        setShowResetConfirm(false);
+                        setBackupToast('Sistema restablecido a los valores iniciales');
+                        setTimeout(() => setBackupToast(null), 3000);
+                      }}
+                      className="px-2.5 py-1 bg-rose-600 text-white rounded-lg font-bold hover:bg-rose-700"
+                    >
+                      Sí, reiniciar
+                    </button>
+                    <button
+                      onClick={() => setShowResetConfirm(false)}
+                      className="px-2.5 py-1 bg-slate-200 text-slate-700 rounded-lg hover:bg-slate-300"
+                    >
+                      Cancelar
+                    </button>
+                  </div>
+                )}
               </div>
+
+              {backupToast && (
+                <div className="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs rounded-xl flex items-center gap-2">
+                  <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>{backupToast}</span>
+                </div>
+              )}
             </div>
           </div>
         )}
